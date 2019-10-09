@@ -17,6 +17,7 @@ set $mod Mod4
 exec_always --no-startup-id compton -m 0.75 --config ~/.config/compton/compton.conf
 exec_always --no-startup-id xrandr --dpi 160
 exec_always --no-startup-id python ~/.scripts/bg.py
+exec_always --no-startup-id /usr/bin/dunst
 mouse_warping output
 
 # i3-gaps
@@ -86,10 +87,8 @@ bindsym $mod+q kill
 # start rofi (a program launcher)
 bindsym $mod+space exec rofi -show run
 bindsym Mod1+Tab exec rofi -show window
-#bindsym $mod+x exec grep -v "#" ~/.scripts/.emoji | dmenu -i -l 20 -p "select emoji" -fn "GeosansLight 18" -sb hotpink | awk '{print$1}' | tr -d '\n' | xclip -selection clipboard
-bindsym $mod+x exec grep -v "#" ~/.scripts/emoji | rofi -dmenu -i -p "select emoji" | awk '{print$1}' | tr -d '\n' | xclip -selection clipboard
-#bindsym $mod+z exec cat ~/.phonetics | dmenu -i -l 20 -fn "UbuntuMono Nerd Font Mono 18" -sb hotpink | awk '{print$1}' | tr -d '\n' | xclip -selection clipboard 
-bindsym $mod+z exec cat ~/.scripts/spanish | rofi -dmenu -i -p "choisi le symbol" | awk '{print$1}' | tr -d '\n' | xclip -selection clipboard 
+bindsym $mod+x exec grep -v "#" ~/.scripts/emoji | rofi -dmenu -i -p "select emoji" | awk '{print$1}' | tr -d '\n' | xclip -rmlastnl -selection clipboard && dunstify -a ROFI emoji copied 
+bindsym $mod+z exec cat ~/.scripts/spanish | rofi -dmenu -i -p "Chose an accent:" | awk '{print$1}' | tr -d '\n' | xclip -rmlastnl -selection clipboard && dunstify -a ROFI accent copied
 bindsym $mod+c exec rofi -show calc -modi "calc:qalc +u8"
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -171,6 +170,8 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
+bindsym $mod+bracketleft workspace prev
+bindsym $mod+bracketright workspace next
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -272,10 +273,7 @@ bindsym XF86AudioPrev exec playerctl previous
 exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
 
 # autostart pprograms
-exec --no-startup-id tilix
-#exec --no-startup-id slack
-#exec --no-startup-id gpmdp
-#exec --no-startup-id st -e gotop -psb
+exec tilix
 exec --no-startup-id systemsettings5
 exec redshift -l 53.534574:-113.709156 -t 6500K:4000K
 exec ~/.config/i3/load_layout.sh
