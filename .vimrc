@@ -1,11 +1,11 @@
 " author: Giancarlo Pernudi Segura
 " see https://giancarlopernudi.com
 "        _
-"       (_)          
-" __   ___ _ __ ____  
-" \ \ / / | '_ ` _  \ 
+"       (_)
+" __   ___ _ __ ____
+" \ \ / / | '_ ` _  \
 "  \ V /| | | | | | |
-"   \_/ |_|_| |_| |_| 
+"   \_/ |_|_| |_| |_|
 
 set encoding=utf-8
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
