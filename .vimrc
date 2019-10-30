@@ -40,7 +40,7 @@ set wildmode=longest,list,full
 " set mouse=a
 autocmd Filetype rmd map <F5> :!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--save<return>
 autocmd Filetype c map <F5> :!gcc<space>-Wall<space>-std=c99<space><c-r>%<space>-o<space><c-r>%<backspace><backspace><space>&&<space>./<c-r>%<backspace><backspace><return>
-autocmd FileType c map <F2> i#include<space><stdio.h><return>#include<space><stdlib.h><return><return>int<space>main(int<space>argc,<space>char<space>**<space>argv)<space>{<return><tab>return<space>0;<return>}<Esc>5k
+autocmd FileType c map <F2> i#include<space><stdio.h><return>#include<space><stdlib.h><return><return>int<space>main(int<space>argc,<space>char<space>**<space>argv)<space>{<return><tab>return<space>0;<Esc>4k
 autocmd FileType md map <F5> :!okular<space><c-r>%<space>&<return><return>
 autocmd FileType tex map <F5> :!pdflatex<space><c-r>%<space>&&<space>pkill<space>-HUP<space>mupdf<return><return>
 autocmd FileType tex map <F4> :!mupdf<space><c-r>%<backspace><backspace><backspace>pdf<space>&<return><return>
