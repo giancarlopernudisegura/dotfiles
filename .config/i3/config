@@ -1,12 +1,11 @@
 # author: Giancarlo Pernudi Segura
 # see https://giancarlopernudi.com
-#  _  _____ 
-#
+#  _  _____
 # (_)|____ |
 #  _     / /
 # | |    \ \
 # | |.___/ /
-# |_|\____/ 
+# |_|\____/
 
 # i3 config file (v4)
 #
@@ -78,8 +77,8 @@ bindsym $mod+Shift+s exec slack
 bindsym $mod+o exec st -e ranger
 bindsym $mod+d exec nemo
 bindsym $mod+Shift+a exec systemsettings5
+bindsym $mod+Shift+w exec tilix -e nmtui
 bindsym Print exec spectacle
-bindsym $mod+Shift+w exec nm-connection-editor
 
 # kill focused window
 bindsym $mod+q kill
@@ -87,7 +86,7 @@ bindsym $mod+q kill
 # start rofi (a program launcher)
 bindsym $mod+space exec rofi -show run
 bindsym Mod1+Tab exec rofi -show window
-bindsym $mod+x exec grep -v "#" ~/.scripts/emoji | rofi -dmenu -i -p "select emoji" | awk '{print$1}' | tr -d '\n' | xclip -rmlastnl -selection clipboard && dunstify -a ROFI emoji copied 
+bindsym $mod+x exec grep -v "#" ~/.scripts/emoji | rofi -dmenu -i -p "select emoji" | awk '{print$1}' | tr -d '\n' | xclip -rmlastnl -selection clipboard && dunstify -a ROFI emoji copied
 bindsym $mod+z exec cat ~/.scripts/spanish | rofi -dmenu -i -p "Chose an accent:" | awk '{print$1}' | tr -d '\n' | xclip -rmlastnl -selection clipboard && dunstify -a ROFI accent copied
 bindsym $mod+c exec rofi -show calc -modi "calc:qalc +u8"
 
@@ -218,8 +217,8 @@ mode "resize" {
         bindsym Down resize shrink height 5 px or 5 ppt
         bindsym Right resize grow width 5 px or 5 ppt
 
-	# same as last ones, but slightly bigger
-	bindsym Shift+Left resize shrink width 10 px or 10 ppt
+        # same as last ones, but slightly bigger
+        bindsym Shift+Left resize shrink width 10 px or 10 ppt
         bindsym Shift+Up resize grow height 10 px or 10 ppt
         bindsym Shift+Down resize shrink height 10 px or 10 ppt
         bindsym Shift+Right resize grow width 10 px or 10 ppt
@@ -240,7 +239,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 #bar {
-	#position top
+        #position top
         #status_command i3blocks -c ~/.config/i3/blocks.conf
 #}
 
@@ -257,9 +256,8 @@ bindsym XF86MonBrightnessUp exec xbacklight -steps 100 -inc 10 # increase screen
 bindsym XF86MonBrightnessDown exec xbacklight -steps 100 -dec 10 # decrease screen brightness
 
 # Touchpad controls
-bindsym XF86TouchpadToggle exec toggletouchpad.sh # toggle touchpad
-exec --no-startup-id xinput --set-prop "SYNA2393:00 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
-exec --no-startup-id xinput --set-prop "SYNA2393:00 06CB:7A13 Touchpad" "libinput Natural Scrolling Enabled" 1
+exec_always --no-startup-id xinput --set-prop "SYNA2393:00 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
+exec_always --no-startup-id xinput --set-prop "SYNA2393:00 06CB:7A13 Touchpad" "libinput Natural Scrolling Enabled" 1
 exec_always --no-startup-id xinput --set-prop "DELL07E6:00 06CB:76AF Touchpad" "libinput Natural Scrolling Enabled" 1
 exec_always --no-startup-id xinput --set-prop "DELL07E6:00 06CB:76AF Touchpad" "libinput Disable While Typing Enabled" 0
 
@@ -273,6 +271,7 @@ bindsym XF86AudioPrev exec playerctl previous
 exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
 
 # autostart pprograms
+exec nm-applet --no-agent
 exec tilix
 exec --no-startup-id systemsettings5
 exec redshift -l 53.534574:-113.709156 -t 6500K:4000K
