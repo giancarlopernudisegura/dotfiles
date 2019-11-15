@@ -28,6 +28,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'lervag/vimtex'
 
 call vundle#end()
 
@@ -60,6 +61,7 @@ let g:zenmode_sidebar_height = 5
 " Airline:
 let g:airline_theme='dracula'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#vimtex#enabled = 1
 
 " gitgutter:
 set updatetime=50
