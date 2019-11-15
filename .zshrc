@@ -1,3 +1,11 @@
+POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -10,7 +18,7 @@ export ZSH="/home/giancarlo/.oh-my-zsh"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
 #ZSH_THEME="powerlevel9k/powerlevel9k"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+#ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -33,7 +41,7 @@ HYPHEN_INSENSITIVE="true"
 # DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=3
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS=true
@@ -71,7 +79,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git web-search sudo zsh-syntax-highlighting)
+plugins=(git web-search sudo zsh-syntax-highlighting aws battery command-not-found)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -80,7 +88,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-export LANG=en_US.UTF-8
+export LANG="en_US.UTF-8"
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -116,7 +124,7 @@ alias cfp='vim ~/.config/polybar/config'
 alias cfx='vim ~/.Xresources && xrdb ~/.Xresources;'
 alias cfs='vim ~/.config/powerline-shell/themes/shell'
 alias cfc='vim ~/.config/compton/compton.conf'
-alias cff='code /home/giancarlo/.mozilla/firefox/x37y9dyn.default/chrome'
+alias cff='code /home/giancarlo/.mozilla/firefox/r2n4znb9.default-nightly/chrome/'
 alias colortest='for x in {0..8}; do for i in {30..37}; do for a in {40..47}; do echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "; done; echo; done; done; echo ""'
 alias neofetch='neofetch --ascii ~/.config/neofetch/img.txt --ascii_colors 3 3 3 3 3 3 --gap 11 | lolcat'
 alias download='sudo pacman -S'
@@ -129,7 +137,9 @@ alias p='python'
 alias pv='python3.7 -m venv venv'
 #alias r='ranger'
 alias l='lsd'
-alias la='lsd -la'
+alias la='lsd -lah'
+alias lh='lsd -lh'
+alias tree='lsd --tree'
 alias pc='cd ~/Pictures'
 alias dl='cd ~/Downloads'
 alias doc='cd ~/Documents'
@@ -185,7 +195,7 @@ if [ "$TERM" != "linux" ]; then
     install_powerline_precmd
 fi
 
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+#source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs battery time date)
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(vi_mode ssh pyvenv context dir vcs)
@@ -201,7 +211,26 @@ POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 source ~/.p10k.zsh
 
-eval $(thefuck --alias)
+source ~/.oh-my-zsh/antigen.zsh
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle heroku
+antigen bundle pip
+antigen bundle lein
+antigen bundle command-not-found
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+antigen theme romkatv/powerlevel10k
+
+# Tell Antigen that you're done.
+antigen apply
 
 # >>> conda initialize >>>
 # # !! Contents within this block are managed by 'conda init' !!
@@ -219,3 +248,6 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 ~/.scripts/ufetch-linux
+source /usr/share/chruby/chruby.sh
+#source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
+(( ! ${+functions[p10k]} )) || p10k finalize
