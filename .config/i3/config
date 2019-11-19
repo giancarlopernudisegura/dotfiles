@@ -259,7 +259,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -steps 100 -dec 10 # decrease scre
 exec_always --no-startup-id xinput --set-prop "SYNA2393:00 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
 exec_always --no-startup-id xinput --set-prop "SYNA2393:00 06CB:7A13 Touchpad" "libinput Natural Scrolling Enabled" 1
 exec_always --no-startup-id xinput --set-prop "DELL07E6:00 06CB:76AF Touchpad" "libinput Natural Scrolling Enabled" 1
-exec_always --no-startup-id xinput --set-prop "DELL07E6:00 06CB:76AF Touchpad" "libinput Disable While Typing Enabled" 0
+exec_always --no-startup-id xinput --set-prop "SYNA2393:00 06CB:7A13 Touchpad" "libinput Disable While Typing Enabled" 0
 
 
 # Media player controls
@@ -272,7 +272,7 @@ exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
 
 # autostart pprograms
 exec nm-applet --no-agent
+exec ~/.config/i3/load_layout.sh
 exec tilix
 exec --no-startup-id systemsettings5
 exec redshift -l 53.534574:-113.709156 -t 6500K:4000K
-exec ~/.config/i3/load_layout.sh
