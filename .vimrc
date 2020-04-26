@@ -9,6 +9,7 @@
 
 set encoding=utf-8
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+autocmd Filetype Makefile set softtabstop=0 noexpandtab
 set ignorecase
 set background=dark
 
@@ -29,6 +30,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'lervag/vimtex'
+Plugin 'adelarsq/vim-matchit'
+Plugin 'tpope/vim-ragtag'
 
 call vundle#end()
 
@@ -45,9 +48,10 @@ autocmd FileType c map <F2> i#include<space><stdio.h><return>#include<space><std
 autocmd FileType md map <F5> :!okular<space><c-r>%<space>&<return><return>
 autocmd FileType tex map <F5> :!pdflatex<space><c-r>%<space>&&<space>pkill<space>-HUP<space>mupdf<return><return>
 autocmd FileType tex map <F4> :!mupdf<space><c-r>%<backspace><backspace><backspace>pdf<space>&<return><return>
+map <F6> :!make<return><return>
 map <TAB> :qa<CR>
 map <Esc><Esc> :w<CR>
-map n :NERDTree<CR>
+map t :NERDTree<CR>
 map f :ZenmodeToggle<CR>
 set autoindent
 set cindent

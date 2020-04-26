@@ -57,7 +57,7 @@ font-2 = Unifont:pixelsize=10;1
 
 modules-left = i3
 modules-center =
-modules-right = xbacklight pulseaudio xkeyboard memory cpu temperature wlan battery date powermenu
+modules-right = xbacklight pulseaudio system-usb-udev xkeyboard memory cpu temperature wlan battery date updates powermenu
 
 tray-position = right
 tray-padding = 6
@@ -110,6 +110,14 @@ mount-0 = /home
 label-mounted =  %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted =  %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/system-usb-udev]
+type = custom/script
+exec = ~/.config/polybar/usb.sh
+tail = true
+click-left = ~/.config/polybar/usb.sh --mount &
+click-right = ~/.config/polybar/usb.sh --unmount &
+label-underline = ${colors.tertiary}
 
 [module/bspwm]
 type = internal/bspwm
@@ -275,6 +283,12 @@ format-disconnected = <label-disconnected>
 ;label-disconnected = %ifname% disconnected
 label-disconnected-foreground = ${colors.foreground-alt}
 
+[module/updates]
+type = custom/script
+exec = ~/.config/polybar/arch_updates.sh
+interval = 600
+format-underline = ${colors.secondary}
+
 [module/date]
 type = internal/date
 interval = 1
@@ -411,7 +425,7 @@ format-spacing = 1
 
 label-open = 
 label-open-foreground = ${colors.alert}
-label-close =  cancel
+label-close = 
 label-close-foreground = ${colors.alert}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
@@ -420,16 +434,23 @@ menu-0-0 = reboot
 menu-0-0-exec = menu-open-1
 menu-0-1 = power off
 menu-0-1-exec = menu-open-2
+menu-0-2 = log out
+menu-0-2-exec = menu-open-3
 
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = reboot
+menu-1-0 = reboot
+menu-1-0-exec = reboot
+menu-1-1 = cancel
+menu-1-1-exec = menu-open-0
 
 menu-2-0 = power off
 menu-2-0-exec = poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
+
+menu-3-0 = log out
+menu-3-0-exec = i3-msg exit
+menu-3-1 = cancel
+menu-3-1-exec = menu-open-0
 
 [settings]
 screenchange-reload = true

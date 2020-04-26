@@ -1,3 +1,4 @@
+export TERMINFO=/usr/lib/terminfo
 POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -114,7 +115,7 @@ alias gcc='gcc -Wall -std=c99'
 alias cfg='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 alias sudo='sudo -p "[sudo] password for %u: "'
 alias ssh-desktop='ssh -X giancarlo@75.159.226.175'
-alias ssh-school='ssh pernudi@ug20.cs.ualberta.ca'
+alias ssh-school='ssh pernudi@ue10.cs.ualberta.ca'
 alias cfv='vim ~/.vimrc'
 alias cfb='vim ~/.bashrc'
 alias cfz='vim ~/.zshrc'
@@ -137,18 +138,17 @@ alias p='python'
 alias pv='python3.7 -m venv venv'
 #alias r='ranger'
 alias l='lsd'
+alias ls='lsd'
 alias la='lsd -lah'
 alias lh='lsd -lh'
 alias tree='lsd --tree'
-alias pc='cd ~/Pictures'
-alias dl='cd ~/Downloads'
-alias doc='cd ~/Documents'
 alias open='dolphin $(pwd) --split'
 alias emacs='emacs -nw'
 alias del='rmtrash'
 alias trash='cd ~/.local/share/Trash/files'
 alias weather='curl wttr.in'
 alias copy='xclip -selection clipboard'
+alias git-upstream='git push --set-upstream origin $(git branch --show-current)'
 
 function configs {
     echo cfv: ~/.vimrc

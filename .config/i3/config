@@ -12,10 +12,11 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $terminal alacritty
 #exec_always --no-startup-id killall compton
 exec_always --no-startup-id compton -m 0.75 --config ~/.config/compton/compton.conf
 exec_always --no-startup-id xrandr --dpi 160
-exec_always --no-startup-id python ~/.scripts/bg.py
+exec_always --no-startup-id ~/.scripts/bg.app $(ls ~/Pictures/wallpapers/d*.jpg)
 exec_always --no-startup-id /usr/bin/dunst
 mouse_warping output
 
@@ -67,7 +68,7 @@ client.urgent		$urgent-bg-color	$urgent-bg-color	$text-color		$indic-color
 floating_modifier Mod1
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id tilix
+bindsym $mod+Return exec --no-startup-id $terminal
 bindsym $mod+Shift+Return exec --no-startup-id konsole --hide-menubar
 
 # open programs
@@ -77,7 +78,7 @@ bindsym $mod+Shift+s exec slack
 bindsym $mod+o exec st -e ranger
 bindsym $mod+d exec nemo
 bindsym $mod+Shift+a exec systemsettings5
-bindsym $mod+Shift+w exec tilix -e nmtui
+bindsym $mod+Shift+w exec $terminal -e nmtui
 bindsym Print exec spectacle
 
 # kill focused window
@@ -271,8 +272,10 @@ bindsym XF86AudioPrev exec playerctl previous
 exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
 
 # autostart pprograms
-exec nm-applet --no-agent
+# exec nm-applet --no-agent
+exec ~/run_wifi.sh
 exec ~/.config/i3/load_layout.sh
-exec tilix
 exec --no-startup-id systemsettings5
 exec redshift -l 53.534574:-113.709156 -t 6500K:4000K
+exec $terminal
+exec_always ~/run_wifi.sh
