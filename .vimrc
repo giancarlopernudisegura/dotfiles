@@ -47,11 +47,11 @@ set ruler
 set splitbelow
 set splitright
 set cursorline
-set updatetime=300
 set formatoptions-=cro
 set clipboard=unnamedplus
 set t_Co=256
 set wildmenu
+set hls is
 vnoremap < <gv
 vnoremap > >gv
 au! BufWritePost $MYVIMRC source %
@@ -77,7 +77,7 @@ let g:zenmode_font ="UbuntuMono Nerd Font Mono 12"
 let g:zenmode_sidebar_height = 5
 
 " Airline:
-let g:airline_theme='dracula'
+let g:airline_theme='kolor'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#vimtex#enabled = 1
 
