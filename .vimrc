@@ -20,7 +20,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'mmai/vim-zenmode'
 Plugin 'powerline/powerline'
 Plugin 'tpenguinltg/vim-closing-brackets'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
@@ -32,6 +31,10 @@ Plugin 'lervag/vimtex'
 Plugin 'adelarsq/vim-matchit'
 Plugin 'tpope/vim-ragtag'
 Plugin 'lilydjwg/colorizer'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'scrooloose/nerdcommenter'
 
 call vundle#end()
 
@@ -42,8 +45,6 @@ syntax on
 filetype plugin on
 set number relativenumber
 set wildmode=longest,list,full
-set mouse=a
-set ruler
 set splitbelow
 set splitright
 set cursorline
@@ -52,6 +53,7 @@ set clipboard=unnamedplus
 set t_Co=256
 set wildmenu
 set hls is
+set colorcolumn=80
 vnoremap < <gv
 vnoremap > >gv
 au! BufWritePost $MYVIMRC source %
@@ -66,15 +68,8 @@ map <F6> :!make<return><return>
 map <TAB> :qa<CR>
 map <Esc><Esc> :w<CR>
 map t :NERDTree<CR>
-map f :ZenmodeToggle<CR>
 set autoindent
 set cindent
-
-" Zenmode:
-let g:zenmode_background = "dark"
-" let g:zenmode_colorscheme = "solarized"
-let g:zenmode_font ="UbuntuMono Nerd Font Mono 12"
-let g:zenmode_sidebar_height = 5
 
 " Airline:
 let g:airline_theme='kolor'
@@ -86,6 +81,7 @@ set updatetime=50
 let g:gitgutter_terminal_reports_focus=0
 set signcolumn=yes
 let g:gitgutter_grep=''
+highlight clear SignColumn
 
 " Indent Guides:
 let g:indent_guides_enable_on_vim_startup = 1
