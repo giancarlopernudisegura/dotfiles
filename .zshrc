@@ -19,7 +19,6 @@ export ZSH="/home/giancarlo/.oh-my-zsh"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
 #ZSH_THEME="powerlevel9k/powerlevel9k"
-#ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -80,7 +79,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git web-search sudo zsh-syntax-highlighting aws battery command-not-found)
+plugins=(git web-search sudo aws battery command-not-found)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -123,9 +122,10 @@ alias cfz='vim ~/.zshrc'
 alias cfk='vim ~/.p10k.zsh'
 alias cfi='vim ~/.config/i3/config'
 alias cfp='vim ~/.config/polybar/config'
-alias cfx='vim ~/.Xresources && xrdb ~/.Xresources;'
+alias cfx='vim ~/.xinitrc'
 alias cfs='vim ~/.config/powerline-shell/themes/shell'
 alias cfc='vim ~/.config/compton/compton.conf'
+alias cfq='vim "+cd ~/.config/qtile" ~/.config/qtile/'
 alias cff='code /home/giancarlo/.mozilla/firefox/r2n4znb9.default-nightly/chrome/'
 alias colortest='for x in {0..8}; do for i in {30..37}; do for a in {40..47}; do echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "; done; echo; done; done; echo ""'
 alias neofetch='neofetch --ascii ~/.config/neofetch/img.txt --ascii_colors 3 3 3 3 3 3 --gap 11 | lolcat'
@@ -194,6 +194,7 @@ function install_powerline_precmd() {
 
 if [ "$TERM" != "linux" ]; then
     install_powerline_precmd
+	export PS2="%_❯ "
 fi
 
 #source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
@@ -234,15 +235,15 @@ antigen theme romkatv/powerlevel10k
 antigen apply
 
 # >>> conda initialize >>>
-# # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/giancarlo/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/giancarlo/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/giancarlo/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/giancarlo/miniconda3/etc/profile.d/conda.sh"
     else
-    if [ -f "/home/giancarlo/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/giancarlo/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/giancarlo/anaconda3/bin:$PATH"
+        export PATH="/home/giancarlo/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
