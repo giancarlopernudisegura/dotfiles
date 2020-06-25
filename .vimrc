@@ -10,13 +10,13 @@
 set encoding=utf-8
 set tabstop=4 softtabstop=0 shiftwidth=4 smarttab
 set ignorecase
-set background=dark
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Plugins:
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'dracula/vim', { 'name': 'dracula' }
 Plugin 'scrooloose/nerdtree'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
@@ -35,6 +35,8 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'}
+Plugin 'mipmip/vim-scimark'
 
 call vundle#end()
 
@@ -54,9 +56,15 @@ set t_Co=256
 set wildmenu
 set hls is
 set colorcolumn=80
+set backupcopy=yes
 vnoremap < <gv
 vnoremap > >gv
 au! BufWritePost $MYVIMRC source %
+set listchars=space:␣,tab:⭾\ ,trail:~,extends:>,precedes:<
+set list
+set background=dark
+set ttymouse=sgr
+set mouse=a
 
 autocmd Filetype rmd map <F5> :!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--save<return>
 autocmd Filetype c map <F5> :!gcc<space>-Wall<space>-std=c99<space><c-r>%<space>-o<space><c-r>%<backspace><backspace><space>&&<space>./<c-r>%<backspace><backspace><return>
@@ -72,7 +80,7 @@ set autoindent
 set cindent
 
 " Airline:
-let g:airline_theme='kolor'
+let g:airline_theme='dracula'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#vimtex#enabled = 1
 
@@ -99,3 +107,6 @@ return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+
+" Dracula colorscheme
+autocmd ColorScheme dracula hi CursorLine cterm=underline term=underline
