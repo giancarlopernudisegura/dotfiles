@@ -1,34 +1,10 @@
 export TERMINFO=/usr/lib/terminfo
-POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/giancarlo/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# Z to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-
-#ZSH_THEME="powerlevel9k/powerlevel9k"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-#ZSH_THEME=random
-#ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -91,15 +67,14 @@ source $ZSH/oh-my-zsh.sh
 export LANG="en_US.UTF-8"
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-export EDITOR='vim'
+export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -108,35 +83,28 @@ export EDITOR='vim'
 
 ##############
 # custom stuff
-PATH="`ruby -e 'puts Gem.user_dir'`/bin:$PATH"
-
 alias gcc='gcc -Wall -std=c99'
 alias cfg='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 alias sudo='sudo -p "[sudo] password for %u: "'
 alias ssh-desktop='ssh -X giancarlo@75.159.226.175'
 alias ssh-school='ssh pernudi@ue10.cs.ualberta.ca'
-alias cfv='vim ~/.vimrc'
+alias cfv='vim ~/.config/nvim/init.lua'
 alias cfb='vim ~/.bashrc'
 alias cfa='vim ~/.config/alacritty/alacritty.yml'
 alias cfz='vim ~/.zshrc'
-alias cfk='vim ~/.p10k.zsh'
 alias cfi='vim ~/.config/i3/config'
 alias cfp='vim ~/.config/polybar/config'
 alias cfx='vim ~/.xinitrc'
 alias cfs='vim ~/.config/powerline-shell/themes/shell'
 alias cfc='vim ~/.config/compton/compton.conf'
 alias cfq='vim "+cd ~/.config/qtile" ~/.config/qtile/'
-alias cff='code /home/giancarlo/.mozilla/firefox/r2n4znb9.default-nightly/chrome/'
+alias cff='code $HOME/.mozilla/firefox/r2n4znb9.default-nightly/chrome/'
 alias colortest='for x in {0..8}; do for i in {30..37}; do for a in {40..47}; do echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "; done; echo; done; done; echo ""'
-alias neofetch='neofetch --ascii ~/.config/neofetch/img.txt --ascii_colors 3 3 3 3 3 3 --gap 11 | lolcat'
-alias download='sudo pacman -S'
-alias uninstall='sudo pacman -Rns'
 alias search='pacman -Ss'
 alias update='sudo pacman -Syu'
 alias smi='sudo make install'
 alias v='vim'
 alias p='python'
-alias pv='python3.7 -m venv venv'
 #alias r='ranger'
 alias l='lsd'
 alias ls='lsd'
@@ -179,40 +147,6 @@ bindkey -s '^[c' 'clear\n'
 # Vi Mode
 # bindkey -v
 
-function powerline_precmd() {
-    PS1="$(powerline-shell --shell zsh $?)"
-}
-
-function install_powerline_precmd() {
-  for s in "${precmd_functions[@]}"; do
-    if [ "$s" = "powerline_precmd" ]; then
-      return
-    fi
-  done
-  precmd_functions+=(powerline_precmd)
-}
-
-if [ "$TERM" != "linux" ]; then
-    install_powerline_precmd
-	export PS2="%_❯ "
-fi
-
-#source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs battery time date)
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(vi_mode ssh pyvenv context dir vcs)
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_CONTEXT_TEMPLATE="%n@`hostname -f`"
-POWERLEVEL9K_HOME_SUB_ICON='💯'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
-POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
-#POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=''
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-source ~/.p10k.zsh
-
 source ~/.oh-my-zsh/antigen.zsh
 
 # Load the oh-my-zsh's library.
@@ -229,27 +163,22 @@ antigen bundle command-not-found
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
-antigen theme romkatv/powerlevel10k
-
 # Tell Antigen that you're done.
 antigen apply
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/giancarlo/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('$HOME/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/giancarlo/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/giancarlo/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/giancarlo/miniconda3/bin:$PATH"
+        export PATH="$HOME/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-~/.scripts/ufetch-linux
-source /usr/share/chruby/chruby.sh
-#source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
-(( ! ${+functions[p10k]} )) || p10k finalize
+eval "$(starship init zsh)"
